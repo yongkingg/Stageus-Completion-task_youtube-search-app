@@ -1,18 +1,28 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 class Setting:
     def __init__(self):
         self.login_font = QtGui.QFont()
         self.login_font.setFamily("Microsoft JhengHei UI")
         self.login_font.setPointSize(30)
-
         self.search_video_font = QtGui.QFont()
         self.search_video_font.setFamily("Microsoft JhengHei UI")
         self.search_video_font.setPointSize(20)
-
+        self.search_video_font.setPixelSize(20)
         self.login_font_printinfor = QtGui.QFont()
         self.login_font_printinfor.setFamily("HY울릉도B")
         self.login_font_printinfor.setPointSize(20)
+        self.login_font_printinfor.setPixelSize(20)
+        
+        self.findidpw_font = QtGui.QFont()
+        self.findidpw_font.setFamily("HY울릉도B")
+        self.findidpw_font.setPointSize(30)
+        self.findidpw_font.setPixelSize(30)
+
+        self.login_font_guide = QtGui.QFont()
+        self.login_font_guide.setFamily("HY울릉도B")
+        self.login_font_guide.setPointSize(15)
+        self.login_font_guide.setPixelSize(15)
+
 class Dialog:
     def __init__(self):
         self.result = QtWidgets.QDialog()

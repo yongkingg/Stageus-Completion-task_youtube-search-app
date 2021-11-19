@@ -37,49 +37,177 @@ class Ui:
         self.stackedWidget.setGeometry(QtCore.QRect(0, 0, 1600, 900))
         self.stackedWidget.setMinimumSize(QtCore.QSize(1600, 900))
         self.stackedWidget.setMaximumSize(QtCore.QSize(1600, 900))
+        self.stackedWidget.setStyleSheet("background-color : white;")
+
     # 시작 페이지 0 
         self.StartPage = QtWidgets.QWidget()
         self.StartPage.setMinimumSize(QtCore.QSize(1600, 900))
         self.StartPage.setMaximumSize(QtCore.QSize(1600, 900))
-        self.StartPage.setStyleSheet("border-image:url(Pic/StartPage.png);")
         self.stackedWidget.addWidget(self.StartPage)
     # 재생목록 페이지 1
         self.PlayListPage = QtWidgets.QWidget()
         self.PlayListPage.setMinimumSize(QtCore.QSize(1600, 900))
         self.PlayListPage.setMaximumSize(QtCore.QSize(1600, 900))
-        self.PlayListPage.setStyleSheet("border-image:url(Pic/PlayListPage.png);")
         self.stackedWidget.addWidget(self.PlayListPage)
     # 영상 재생 페이지 2
         self.VideoPage = QtWidgets.QWidget()
         self.VideoPage.setMinimumSize(QtCore.QSize(1600, 900))
         self.VideoPage.setMaximumSize(QtCore.QSize(1600, 900))
-        self.VideoPage.setStyleSheet("border-image:url(Pic/VideoPage.png);")
         self.stackedWidget.addWidget(self.VideoPage)
     # 영상 검색 페이지 3
         self.VideoSearchPage = QtWidgets.QWidget()
         self.VideoSearchPage.setMinimumSize(QtCore.QSize(1600, 900))
         self.VideoSearchPage.setMaximumSize(QtCore.QSize(1600, 900))
-        self.VideoSearchPage.setStyleSheet("border-image:url(Pic/VideoSearchPage.png);")
         self.stackedWidget.addWidget(self.VideoSearchPage)
     # 아이디/비밀번호 찾기 페이지 4
         self.FindAccountPage = QtWidgets.QWidget()
         self.FindAccountPage.setMinimumSize(QtCore.QSize(1600, 900))
         self.FindAccountPage.setMaximumSize(QtCore.QSize(1600, 900))
-        self.FindAccountPage.setStyleSheet("border-image:url(Pic/FindAccountPage.png);")
         self.stackedWidget.addWidget(self.FindAccountPage)
     # 회원가입페이지 5
         self.MakeAccountPage = QtWidgets.QWidget()
         self.MakeAccountPage.setMinimumSize(QtCore.QSize(1600, 900))
         self.MakeAccountPage.setMaximumSize(QtCore.QSize(1600, 900))
-        self.MakeAccountPage.setStyleSheet("border-image:url(Pic/MakeManageID.png);")
         self.stackedWidget.addWidget(self.MakeAccountPage)
     # 계정 관리 창 6
         self.ManageInforPage = QtWidgets.QWidget()
         self.ManageInforPage.setMinimumSize(QtCore.QSize(1600, 900))
         self.ManageInforPage.setMaximumSize(QtCore.QSize(1600, 900))
-        self.ManageInforPage.setStyleSheet("border-image:url(Pic/MakeManageID.png);")
         self.stackedWidget.addWidget(self.ManageInforPage)
 
+
+
+#로그인 사진
+        self.loginPic = QtWidgets.QLabel(self.StartPage)
+        self.loginPic.setGeometry(400,100,800,400)
+        self.loginPic.setStyleSheet(
+            "border-image : url(Pic/LoginPic.png);"
+            "border : white;"
+        )   
+        # 계정만들기
+        self.makeAccountPic = QtWidgets.QLabel(self.StartPage)
+        self.makeAccountPic.setGeometry(470,717,250,50)
+        self.makeAccountPic.setText("Join membership?")
+        self.makeAccountPic.setFont(self.getSetting.login_font_guide)
+
+        # 아이디비번찾기 안내
+        self.findAccountPic = QtWidgets.QLabel(self.StartPage)
+        self.findAccountPic.setGeometry(935,717,200,50)
+        self.findAccountPic.setText("Find ID/PW")
+        self.findAccountPic.setFont(self.getSetting.login_font_guide)
+        self.findAccountPic = QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+        #배경 정사각형
+        self.backgroundRec_playlistpage = QtWidgets.QLabel(self.PlayListPage)
+        self.backgroundRec_playlistpage.setGeometry(5,0,1595,900)
+        self.backgroundRec_playlistpage.setStyleSheet("border : 2px solid black;")
+        self.backgroundRec_startpage = QtWidgets.QLabel(self.StartPage)
+        self.backgroundRec_startpage.setGeometry(5,0,1595,900)
+        self.backgroundRec_startpage.setStyleSheet("border : 2px solid black;")
+        self.backgroundRec_videopage = QtWidgets.QLabel(self.VideoPage)
+        self.backgroundRec_videopage.setGeometry(5,0,1595,900)
+        self.backgroundRec_videopage.setStyleSheet("border : 2px solid black;")
+        self.backgroundRec_videosearchpage = QtWidgets.QLabel(self.VideoSearchPage)
+        self.backgroundRec_videosearchpage.setGeometry(5,0,1595,900)
+        self.backgroundRec_videosearchpage.setStyleSheet("border : 2px solid black;")
+        self.backgroundRec_manageinforpage = QtWidgets.QLabel(self.ManageInforPage)
+        self.backgroundRec_manageinforpage.setGeometry(5,0,1595,900)
+        self.backgroundRec_manageinforpage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : #D9D9D9;"
+            )
+
+
+        self.backgroundRec_makeaccountpage = QtWidgets.QLabel(self.MakeAccountPage)
+        self.backgroundRec_makeaccountpage.setGeometry(5,0,1595,900)
+        self.backgroundRec_makeaccountpage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : #D9D9D9;"
+            )
+        self.backgroundRec_findaccountpage = QtWidgets.QLabel(self.FindAccountPage)
+        self.backgroundRec_findaccountpage.setGeometry(5,0,1595,900)
+        self.backgroundRec_findaccountpage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : #BFBFBF;"
+            )
+        # 상단 라벨 
+        self.upside_bar_startpage = QtWidgets.QLabel(self.StartPage)
+        self.upside_bar_startpage.setGeometry(5,0,1595,50)
+        self.upside_bar_startpage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : #BFBFBF;"
+        )
+        self.upside_bar_playlistpage = QtWidgets.QLabel(self.PlayListPage)
+        self.upside_bar_playlistpage.setGeometry(5,0,1595,50)
+        self.upside_bar_playlistpage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : #BFBFBF;"
+        )
+        self.upside_bar_findaccountpage = QtWidgets.QLabel(self.FindAccountPage)
+        self.upside_bar_findaccountpage.setGeometry(5,0,1595,50)
+        self.upside_bar_findaccountpage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : #BFBFBF;"
+        )
+        self.upside_bar_makeaccountpage = QtWidgets.QLabel(self.MakeAccountPage)
+        self.upside_bar_makeaccountpage.setGeometry(5,0,1595,50)
+        self.upside_bar_makeaccountpage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : #BFBFBF;"
+        )
+        self.upside_bar_videosearchpage = QtWidgets.QLabel(self.VideoSearchPage)
+        self.upside_bar_videosearchpage.setGeometry(5,0,1595,50)
+        self.upside_bar_videosearchpage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : #BFBFBF;"
+        )
+        self.upside_bar_manageinforpage = QtWidgets.QLabel(self.ManageInforPage)
+        self.upside_bar_manageinforpage.setGeometry(5,0,1595,50)
+        self.upside_bar_manageinforpage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : #BFBFBF;"
+        )
+        self.upside_bar_videopage = QtWidgets.QLabel(self.VideoPage)
+        self.upside_bar_videopage.setGeometry(5,0,1595,50)
+        self.upside_bar_videopage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : #BFBFBF;"
+        )
+        #상단 라벨 위 유튜브 이미지
+        self.upside_bar_image_startpage = QtWidgets.QLabel(self.StartPage)
+        self.upside_bar_image_startpage.setGeometry(10,10,200,30)
+        self.upside_bar_image_startpage.setStyleSheet(
+            "background-image: url(Pic/youtubelogo.png);"
+        )
+        self.upside_bar_image_playlistpage = QtWidgets.QLabel(self.PlayListPage)
+        self.upside_bar_image_playlistpage.setGeometry(10,10,200,30)
+        self.upside_bar_image_playlistpage.setStyleSheet(
+            "background-image: url(Pic/youtubelogo.png);"
+        )
+        self.upside_bar_image_findaccountpage = QtWidgets.QLabel(self.FindAccountPage)
+        self.upside_bar_image_findaccountpage.setGeometry(10,10,200,30)
+        self.upside_bar_image_findaccountpage.setStyleSheet(
+            "background-image: url(Pic/youtubelogo.png);"
+        )
+        self.upside_bar_image_makeaccountpage = QtWidgets.QLabel(self.MakeAccountPage)
+        self.upside_bar_image_makeaccountpage.setGeometry(10,10,200,30)
+        self.upside_bar_image_makeaccountpage.setStyleSheet(
+            "background-image: url(Pic/youtubelogo.png);"
+        )
+        self.upside_bar_image_videosearchpage = QtWidgets.QLabel(self.VideoSearchPage)
+        self.upside_bar_image_videosearchpage.setGeometry(10,10,200,30)
+        self.upside_bar_image_videosearchpage.setStyleSheet(
+            "background-image: url(Pic/youtubelogo.png);"
+        )
+        self.upside_bar_image_manageinforpage = QtWidgets.QLabel(self.ManageInforPage)
+        self.upside_bar_image_manageinforpage.setGeometry(10,10,200,30)
+        self.upside_bar_image_manageinforpage.setStyleSheet(
+            "background-image: url(Pic/youtubelogo.png);"
+        )
+        self.upside_bar_image_videopage = QtWidgets.QLabel(self.VideoPage)
+        self.upside_bar_image_videopage.setGeometry(10,10,200,30)
+        self.upside_bar_image_videopage.setStyleSheet(
+            "background-image: url(Pic/youtubelogo.png);"
+        )
         # 아이디 비밀번호 입력
         self.inputIDPW = []  # (0.아이디 입력 1.비밀번호 입력)
         for index in range(0,2):
@@ -120,159 +248,86 @@ class Ui:
                 "border : 2px solid black;"
             )
 
+
+
+
+
+
+        # 정보출력쪽 정사각형 플레이리스트창
+        self.printspace_playlistpage = QtWidgets.QLabel(self.PlayListPage)
+        self.printspace_playlistpage.setGeometry(50,73,300,800)
+        self.printspace_playlistpage.setStyleSheet(
+            "border : 4px solid black;"
+            "background-color : #D9D9D9;"
+            )
+        # 정보출력쪽 사람 플레이리스트창
+        self.personimage_playlistpage = QtWidgets.QLabel(self.PlayListPage)
+        self.personimage_playlistpage.setGeometry(60,80,280,310)
+        self.personimage_playlistpage.setStyleSheet(
+            "border-image : url(Pic/person.png);"
+            )
+
+        # 정보출력쪽 정사각형 영상검색창
+        self.printspace_videosearchpage = QtWidgets.QLabel(self.VideoSearchPage)
+        self.printspace_videosearchpage.setGeometry(50,73,300,800)
+        self.printspace_videosearchpage.setStyleSheet(
+            "border : 4px solid black;"
+            "background-color : #D9D9D9;"
+            )
+        # 정보출력쪽 사람 영상검색창
+        self.personimage_videosearchpage = QtWidgets.QLabel(self.VideoSearchPage)
+        self.personimage_videosearchpage.setGeometry(60,80,280,310)
+        self.personimage_videosearchpage.setStyleSheet(
+            "border-image : url(Pic/person.png);"
+            )
+            
         # 정보출력 - 플레이리스트 페이지 ( 0. 이름 1.나이 2.전화번호3.팀4.직급)
         self.print_infor_playlistpage = []
         for index in range(0,5):
             tmpSpace = QtWidgets.QLabel(self.PlayListPage)
-            if index == 0 :
-                xPos = 160
-                yPos = 425
-                xlength = 200
-            elif index == 1:
-                xPos = 135
-                yPos = 490
-                xlength = 225
-            elif index == 2:
-                xPos = 140
-                yPos = 565
-                xlength = 220
-            elif index == 3:
-                xPos = 155
-                yPos = 645
-                xlength = 205
-            elif index == 4:
-                xPos = 170
-                yPos = 720
-                xlength = 190
-            tmpSpace.setGeometry(xPos,yPos,xlength,50)
+            yPos = 425 + (index * 65)
+            tmpSpace.setGeometry(60,yPos,280,50)
             tmpSpace.setStyleSheet("border-image : '';"
                 "Color : Black;"
             )
             self.print_infor_playlistpage.append(tmpSpace)
-
-            # 정보출력 - 영상검색페이지
-        self.print_infor_searchvideopage = []
+        # 정보출력 - 영상 검색 페이지
+        self.print_infor_videosearchpage = []
         for index in range(0,5):
             tmpSpace = QtWidgets.QLabel(self.VideoSearchPage)
-            if index == 0 :
-                xPos = 160
-                yPos = 425
-                xlength = 200
-            elif index == 1:
-                xPos = 135
-                yPos = 490
-                xlength = 225
-            elif index == 2:
-                xPos = 140
-                yPos = 565
-                xlength = 220
-            elif index == 3:
-                xPos = 155
-                yPos = 645
-                xlength = 205
-            elif index == 4:
-                xPos = 170
-                yPos = 720
-                xlength = 190
-            tmpSpace.setGeometry(xPos,yPos,xlength,50)
-            tmpSpace.setStyleSheet("border-image : '';"
-                    "Color : Black;"
-            )
-            self.print_infor_searchvideopage.append(tmpBtn)
-
-            # 정보출력 - 아이디/비밀번호 찾기 페이지
-        self.print_infor_findaccountpage = []
-        for index in range(0,5):
-            tmpSpace = QtWidgets.QLabel(self.FindAccountPage)
-            if index == 0 :
-                xPos = 160
-                yPos = 425
-                xlength = 200
-            elif index == 1:
-                xPos = 135
-                yPos = 490
-                xlength = 225
-            elif index == 2:
-                xPos = 140
-                yPos = 565
-                xlength = 220
-            elif index == 3:
-                xPos = 155
-                yPos = 645
-                xlength = 205
-            elif index == 4:
-                xPos = 170
-                yPos = 720
-                xlength = 190
-            tmpSpace.setGeometry(xPos,yPos,xlength,50)
+            yPos = 425 + (index * 65)
+            tmpSpace.setGeometry(60,yPos,280,50)
             tmpSpace.setStyleSheet("border-image : '';"
                 "Color : Black;"
             )
-            self.print_infor_findaccountpage.append(tmpBtn)
-
-            # 정보출력 - 회원가입 페이지
-        self.print_infor_makeaccountpage = []
-        for index in range(0,5):
-            tmpSpace = QtWidgets.QLabel(self.MakeAccountPage)
-            if index == 0 :
-                xPos = 160
-                yPos = 425
-                xlength = 200
-            elif index == 1:
-                xPos = 135
-                yPos = 490
-                xlength = 225
-            elif index == 2:
-                xPos = 140
-                yPos = 565
-                xlength = 220
-            elif index == 3:
-                xPos = 155
-                yPos = 645
-                xlength = 205
-            elif index == 4:
-                xPos = 170
-                yPos = 720
-                xlength = 190
-            tmpSpace.setGeometry(xPos,yPos,xlength,50)
-            tmpSpace.setStyleSheet("border-image : '';"
-                "Color : Black;"
+            self.print_infor_playlistpage.append(tmpSpace)
+        
+        # 플레이리스트창 배경
+        self.back_videosearchpage = QtWidgets.QLabel(self.VideoSearchPage)
+        self.back_videosearchpage.setGeometry(395,100,1170,690)
+        self.back_videosearchpage.setStyleSheet(
+            "border: 4px solid black;"
+            "background-color : #D9D9D9"
             )
-            self.print_infor_makeaccountpage.append(tmpBtn)
-
-            # 정보출력 - 회원정보수정 페이지
-        self.print_infor_manageinforpage = []
-        for index in range(0,5):
-            tmpSpace = QtWidgets.QLabel(self.ManageInforPage)
-            if index == 0 :
-                xPos = 160
-                yPos = 425
-                xlength = 200
-            elif index == 1:
-                xPos = 135
-                yPos = 490
-                xlength = 225
-            elif index == 2:
-                xPos = 140
-                yPos = 565
-                xlength = 220
-            elif index == 3:
-                xPos = 155
-                yPos = 645
-                xlength = 205
-            elif index == 4:
-                xPos = 170
-                yPos = 720
-                xlength = 190
-            tmpSpace.setGeometry(xPos,yPos,xlength,50)
-            tmpSpace.setStyleSheet("border-image : '';"
-                "Color : Black;"
+        self.logoutbar_videosearchpage = QtWidgets.QLabel(self.VideoSearchPage)
+        self.logoutbar_videosearchpage.setGeometry(395,786,1080,85)
+        self.logoutbar_videosearchpage.setStyleSheet(
+            "border: 4px solid black;"
+            "background-color : #D9D9D9"
             )
-            self.print_infor_manageinforpage.append(tmpBtn)
-
-
-
-
+        # 플레이리스트창
+        self.back_playlistpage = QtWidgets.QLabel(self.PlayListPage)
+        self.back_playlistpage.setGeometry(395,100,1170,690)
+        self.back_playlistpage.setStyleSheet(
+            "border: 4px solid black;"
+            "background-color : #D9D9D9"
+            )
+        self.logoutbar_playlistpage = QtWidgets.QLabel(self.PlayListPage)
+        self.logoutbar_playlistpage.setGeometry(395,786,999,85)
+        self.logoutbar_playlistpage.setStyleSheet(
+            "border: 4px solid black;"
+            "background-color : #D9D9D9"
+            )
 
         # 영상 검색 창
         self.searchvideo_playlistpage = QtWidgets.QLineEdit(self.PlayListPage)
@@ -289,13 +344,13 @@ class Ui:
         self.button_playlistpage_text = ["UPDATE","LOGOUT"]
         for index in range(0,2):
             tmpBtn = QtWidgets.QPushButton(self.PlayListPage)
-            xPos = 100 + (index*1286)
+            xPos = 100 + (index*1284)
             if index == 0:
                 yPos = 780
                 xLength = 200
                 yLength = 70
             else:
-                yPos =789
+                yPos =786
                 xLength = 181
                 yLength = 85
             tmpBtn.setGeometry(xPos,yPos,xLength,yLength)
@@ -317,6 +372,26 @@ class Ui:
         self.button_searchbar_playlistpage[1].setStyleSheet("border-image:url(Pic/AddPlayList.png);")
 
 
+
+
+        self.videospace_videopage = QtWidgets.QLabel(self.VideoPage)
+        self.videospace_videopage.setGeometry(56,145,1100,610)
+        self.videospace_videopage.setStyleSheet(
+            "background-color : #D9D9D9;"
+            "border : 2px solid black;"
+            )
+        self.videobtnspace_videopage = QtWidgets.QLabel(self.VideoPage)
+        self.videobtnspace_videopage.setGeometry(56,754,1100,87)
+        self.videobtnspace_videopage.setStyleSheet(
+            "background-color : grey;"
+            "border : 2px solid black;"
+            )
+        self.playbtnspace_videopage = QtWidgets.QLabel(self.VideoPage)
+        self.playbtnspace_videopage.setGeometry(1193,145,350,700)
+        self.playbtnspace_videopage.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : grey;"
+            )
         # 영상 재생 관련 (0.재생1.일시중지2.다음영상3.이전영상4.볼륨조절)
         self.button_video = []
         for index in range(0,5):
@@ -409,27 +484,21 @@ class Ui:
         self.button_back_findaccountpage.setStyleSheet("border-image:url(Pic/Back_VideoSearchPage.png);")
 
 
-        # 영상 검색
-        self.searchvideo_findaccountpage = QtWidgets.QLineEdit(self.FindAccountPage)
-        self.searchvideo_findaccountpage.setGeometry(395,73,1011,60)
-        self.searchvideo_findaccountpage.setStyleSheet(
-                "border-image : '';"
-                "background-color : lightgrey;"    
-                "border : 4px solid black;"
-            )
-        self.searchvideo_findaccountpage.setFont(self.getSetting.search_video_font)
-
-
-        # 영상 검색창 옆 버튼 (0.돋보기 1.재생목록추가)
-        self.button_searchbar_findaccountpage = []
+    
+        self.guide_findaccountpage = []
+        self.guide_findaccountpage_text = ["FINDID","FINDPW"]
         for index in range(0,2):
-            tmpBtn = QtWidgets.QPushButton(self.FindAccountPage)
-            xPos = 1407 + (index*79)
-            tmpBtn.setGeometry(xPos,73,80,60)
-            self.button_searchbar_findaccountpage.append(tmpBtn)
-        self.button_searchbar_findaccountpage[0].setStyleSheet("border-image:url(Pic/SearchBtn.png);")
-        self.button_searchbar_findaccountpage[1].setStyleSheet("border-image:url(Pic/AddPlayList.png);")
-
+            tmpSpace = QtWidgets.QLabel(self.FindAccountPage)
+            yPos = 180 + (index * 340)
+            tmpSpace.setGeometry(650,yPos,300,70)
+            self.guide_findaccountpage.append(tmpSpace)
+            self.guide_findaccountpage[index].setStyleSheet(
+                "border : 4px solid black;"
+                "background-color : grey;"
+                )
+            self.guide_findaccountpage[index].setText(self.guide_findaccountpage_text[index])
+            self.guide_findaccountpage[index].setFont(self.getSetting.findidpw_font)
+            self.guide_findaccountpage[index].setAlignment(QtCore.Qt.AlignCenter)
         # 정보 입력창 (0.이름 1.전화번호 3.아이디 입력 4.전화번호 입력)
         self.inputinfor_findaccountpage = []
         for index in range(0,4):
@@ -440,7 +509,7 @@ class Ui:
             yPos = 260 + (index * 80)
             if index >= 2:
                 yPos = 440 + ((index)*80)
-            tmpSpace.setGeometry(820,yPos,xlength,67)
+            tmpSpace.setGeometry(600,yPos,xlength,67)
             self.inputinfor_findaccountpage.append(tmpSpace)
             self.inputinfor_findaccountpage[index].setStyleSheet(
                 "border-image : '';"
@@ -453,7 +522,7 @@ class Ui:
         for index in range(0,2):
             tmpSpace = QtWidgets.QLabel(self.FindAccountPage)
             yPos = 420 + (index* 340)
-            tmpSpace.setGeometry(820,yPos,400,67)
+            tmpSpace.setGeometry(600,yPos,400,67)
             self.printidpw_findaccountpage.append(tmpSpace)
             self.printidpw_findaccountpage[index].setStyleSheet(
                 "border-image : '';"
@@ -467,7 +536,7 @@ class Ui:
         for index in range(0,2):
             tmpBtn = QtWidgets.QPushButton(self.FindAccountPage)
             yPos = 340 + (index*340)
-            tmpBtn.setGeometry(1100,yPos,120,67)
+            tmpBtn.setGeometry(880,yPos,120,67)
             self.button_findidpw.append(tmpBtn)
             self.button_findidpw[index].setText(self.button_findidpw_text[index])
             self.button_findidpw[index].setFont(self.getSetting.search_video_font)
@@ -479,34 +548,15 @@ class Ui:
 
 
     
-    # update, back
+        # back
         self.button_back_makeaccountpage = QtWidgets.QPushButton(self.MakeAccountPage)
         self.button_back_makeaccountpage.setGeometry(1472,710,93,160)
         self.button_back_makeaccountpage.setStyleSheet("border-image:url(Pic/Back_VideoSearchPage.png);")
 
-        # 영상 검색
-        self.searchvideo_makeaccountpage = QtWidgets.QLineEdit(self.MakeAccountPage)
-        self.searchvideo_makeaccountpage.setGeometry(395,73,1011,60)
-        self.searchvideo_makeaccountpage.setStyleSheet(
-                "border-image : '';"
-                "background-color : lightgrey;"    
-                "border : 4px solid black;"
-            )
-        self.searchvideo_makeaccountpage.setFont(self.getSetting.search_video_font)
-
-        # 영상 검색창 옆 버튼
-        self.button_searchbar_makeaccountpage = []
-        for index in range(0,2):
-            tmpBtn = QtWidgets.QPushButton(self.MakeAccountPage)
-            xPos = 1407 + (index*79)
-            tmpBtn.setGeometry(xPos,73,80,60)
-            self.button_searchbar_makeaccountpage.append(tmpBtn)
-        self.button_searchbar_makeaccountpage[0].setStyleSheet("border-image:url(Pic/SearchBtn.png);")
-        self.button_searchbar_makeaccountpage[1].setStyleSheet("border-image:url(Pic/AddPlayList.png);")
-
+    
         #아이디 중복확인버튼
         self.button_checkid = QtWidgets.QPushButton(self.MakeAccountPage)
-        self.button_checkid.setGeometry(1150,380,150,60)
+        self.button_checkid.setGeometry(950,380,150,60)
         self.button_checkid.setText("CHECK")
         self.button_checkid.setFont(self.getSetting.search_video_font)
         self.button_checkid.setStyleSheet(
@@ -515,6 +565,9 @@ class Ui:
             "border : 4px solid black;"
         )
 
+        self.personimage_makeaccountpage = QtWidgets.QLabel(self.MakeAccountPage)
+        self.personimage_makeaccountpage.setGeometry(650,60,300,300)
+        self.personimage_makeaccountpage.setStyleSheet("border-image : url(Pic/person.png);")
         # 정보 입력
         self.inputinfor_makeaccountpage = []
         for index in range(0,5):
@@ -524,7 +577,7 @@ class Ui:
             else:
                 xlength = 600
             yPos = 380 + (index * 70)
-            tmpSpace.setGeometry(700,yPos,xlength,60)
+            tmpSpace.setGeometry(500,yPos,xlength,60)
             self.inputinfor_makeaccountpage.append(tmpSpace)
             self.inputinfor_makeaccountpage[index].setStyleSheet(
                 "border-image : '';"
@@ -535,7 +588,7 @@ class Ui:
         self.combobox_makeaccountpage = []
         for index in range(0,2):
             tmpBox = QtWidgets.QComboBox(self.MakeAccountPage)
-            xPos = 700 + (index*350)
+            xPos = 500 + (index*350)
             tmpBox.setGeometry(xPos,730,250,60)
             self.combobox_makeaccountpage.append(tmpBox)
             self.combobox_makeaccountpage[index].setStyleSheet(
@@ -546,7 +599,7 @@ class Ui:
             
         # 회원가입 버튼
         self.button_makeaccount = QtWidgets.QPushButton(self.MakeAccountPage) #회원가입 버튼
-        self.button_makeaccount.setGeometry(850,800,300,50)
+        self.button_makeaccount.setGeometry(650,800,300,50)
         self.button_makeaccount.setText("MAKEID")
         self.button_makeaccount.setFont(self.getSetting.search_video_font)
         self.button_makeaccount.setStyleSheet(
@@ -561,32 +614,18 @@ class Ui:
         self.button_back_manageinforpage = QtWidgets.QPushButton(self.ManageInforPage)
         self.button_back_manageinforpage.setGeometry(1472,710,93,160)
         self.button_back_manageinforpage.setStyleSheet("border-image:url(Pic/Back_VideoSearchPage.png);")
-        # 영상 검색
-        self.searchvideo_manageinforpage = QtWidgets.QLineEdit(self.ManageInforPage)
-        self.searchvideo_manageinforpage.setGeometry(395,73,1011,60)
-        self.searchvideo_manageinforpage.setStyleSheet(
-                "border-image : '';"
-                "background-color : lightgrey;"    
-                "border : 4px solid black;"
-            )
-        self.searchvideo_manageinforpage.setFont(self.getSetting.search_video_font)
+        
 
-        # 영상 검색창 옆 버튼
-        self.button_searchbar_manageinforpage = []
-        for index in range(0,2):
-            tmpBtn = QtWidgets.QPushButton(self.ManageInforPage)
-            xPos = 1407 + (index*79)
-            tmpBtn.setGeometry(xPos,73,80,60)
-            self.button_searchbar_manageinforpage.append(tmpBtn)
-        self.button_searchbar_manageinforpage[0].setStyleSheet("border-image:url(Pic/SearchBtn.png);")
-        self.button_searchbar_manageinforpage[1].setStyleSheet("border-image:url(Pic/AddPlayList.png);")
+        self.personimage_manageinforpage = QtWidgets.QLabel(self.ManageInforPage)
+        self.personimage_manageinforpage.setGeometry(650,60,300,300)
+        self.personimage_manageinforpage.setStyleSheet("border-image : url(Pic/person.png);")
 
         # 정보 입력
         self.inputinfor_manageinforpage = []
         for index in range(0,5):
             tmpSpace = QtWidgets.QLineEdit(self.ManageInforPage)
             yPos = 380 + (index * 70)
-            tmpSpace.setGeometry(700,yPos,600,60)
+            tmpSpace.setGeometry(500,yPos,600,60)
             self.inputinfor_manageinforpage.append(tmpSpace)
             self.inputinfor_manageinforpage[index].setStyleSheet(
                 "border-image : '';"
@@ -596,7 +635,7 @@ class Ui:
             
         # 업데이트 버튼 
         self.button_manageinforpage = QtWidgets.QPushButton(self.ManageInforPage) #회원가입 버튼
-        self.button_manageinforpage.setGeometry(850,740,300,50)
+        self.button_manageinforpage.setGeometry(650,740,300,50)
         self.button_manageinforpage.setText("UPDATE")
         self.button_manageinforpage.setFont(self.getSetting.search_video_font)
         self.button_manageinforpage.setStyleSheet(
@@ -610,9 +649,9 @@ class Ui:
         self.pageList = [self.StartPage,self.PlayListPage,self.VideoPage,self.VideoSearchPage,self.FindAccountPage,self.MakeAccountPage,self.ManageInforPage]
         for index in range(0,len(self.pageList)):
             tmpBtn = QtWidgets.QPushButton(self.pageList[index])
-            tmpBtn.setGeometry(1540,10,50,50)
+            tmpBtn.setGeometry(1540,5,40,40)
             self.button_exit.append(tmpBtn)
             self.button_exit[index].setStyleSheet("border-image:url(Pic/Exit.png);")
 
-        # self.stackedWidget.setCurrentIndex(5)  
+        # self.stackedWidget.setCurrentIndex(6)  
         self.mainWindow.show()
