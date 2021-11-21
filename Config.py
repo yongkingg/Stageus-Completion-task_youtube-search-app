@@ -23,6 +23,11 @@ class Setting:
         self.login_font_guide.setPointSize(15)
         self.login_font_guide.setPixelSize(15)
 
+        self.warning_font = QtGui.QFont()
+        self.warning_font.setFamily("HY울릉도B")
+        self.warning_font.setPointSize(15)
+        self.warning_font.setPixelSize(15)
+
 class Dialog:
     def __init__(self):
         self.result = QtWidgets.QDialog()
@@ -33,6 +38,6 @@ class Dialog:
 class Type:
     def __init__(self):
         self.intType = ["1","2","3","4","5","6","7","8","9","0"]
-        self.specialText = ["!","@","#","$","%","^","&","*","(",")","_","+","=",".","?","/","<",">","|","\\",".",","]
+        self.specialText = ["!","@","#","$","%","^","&","*","(",")","_","+","=",".","?","/","<",">","|","\\",".",",",";"]
         self.english = ["q","Q","w","W","e","E","r","R","t","T","y","Y","u","U","i","I","o","O","p","P","a","A","s","S","d","D","f","F","g","G","h","H","j","J","k","K","l","L","z","Z","x","X","c","C","v","V","b","B","n","N","m","M"]
-     
+        self.korean = ["ㅂ","ㅈ","ㄷ","ㄱ","ㅅ","ㅛ","ㅕ","ㅑ","ㅐ","ㅔ","ㅁ","ㄴ","ㅇ","ㄹ","ㅎ","ㅗ","ㅓ","ㅏ","ㅣ","ㅋ","ㅌ","ㅊ","ㅠ","ㅍ","ㅜ","ㅡ"]

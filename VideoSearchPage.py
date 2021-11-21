@@ -1,13 +1,32 @@
-from PyQt5 import QtWidgets
-import sys
-from PyQt5.QtCore import QCoreApplication
-import Ui
+from sys import _xoptions
+from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtGui
+from PyQt5.QtGui import QBrush, QImage, QPalette, QPixmap
+import Config
 import MyDataBase
 
+
 class VideoSearchPage:
-    def __init__(self,revui):
-        self.ui = revui
+    def __init__(self,revUi,revId):
+        self.ui = revUi
         self.db = MyDataBase.MyDataBase()
+        self.getSetting = Config.Setting()
+        self.db = MyDataBase.MyDataBase()
+
+        self.getIdValue = revId
+        self.getAccontInfor = self.db.read("userInterFace",["id"],[self.getIdValue])
+        # 인터페이스리스트 적용 X
+        self.interFaceList = ["Name","Age","Num","TEAM","GRADE"]
+        for index in range(0,5):
+            print(self.interFaceList[index] + " : " + str(self.getAccontInfor[0][index+1]))
+            if index == 2:
+                self.ui.print_infor_videosearchpage[index].setText(self.interFaceList[index] + " : " + "0" + str(self.getAccontInfor[0][index+1]))   
+            else:
+                self.ui.print_infor_videosearchpage[index].setText(self.interFaceList[index] + " : " + str(self.getAccontInfor[0][index+1]))  
+            self.ui.print_infor_videosearchpage[index].setAlignment(QtCore.Qt.AlignCenter)
+            self.ui.print_infor_videosearchpage[index].setFont(self.getSetting.login_font_printinfor)
+
+
         # 돋보기 버튼 이벤트
         self.ui.button_searchbar_videosearchpage[0].mousePressEvent = lambda event: self.videosearch_event(event)
         self.ui.button_searchbar_videosearchpage[0].enterEvent = lambda event: self.enter_search_event(event)
@@ -24,6 +43,7 @@ class VideoSearchPage:
         self.ui.button_videosearchpage[0].mousePressEvent = lambda event: self.update_event(event)
         self.ui.button_videosearchpage[0].enterEvent = lambda event: self.enter_updatebtn_event(event)
         self.ui.button_videosearchpage[0].leaveEvent = lambda event: self.leave_updatebtn_event(event)
+
 
 
     def update_event(self,event):

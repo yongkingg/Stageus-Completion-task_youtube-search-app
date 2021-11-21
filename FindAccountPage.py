@@ -2,15 +2,14 @@ from PyQt5 import QtWidgets
 import sys
 from PyQt5 import QtCore
 from PyQt5.QtCore import QCoreApplication
+import Config
 import MyDataBase
-import Setting
-
 class FindAccountPage:
     def __init__(self,revui):
         self.ui = revui
         self.db = MyDataBase.MyDataBase()
-        self.getType = Setting.Type()
-        self.getFont = Setting.Setting()
+        self.getType = Config.Type()
+        self.getFont = Config.Setting()
         # IDFIND 버튼 이벤트
         self.ui.button_findidpw[0].mousePressEvent = lambda event: self.idfind_checkform(event)
         self.ui.button_findidpw[0].enterEvent = lambda event: self.enter_idfind_event(event)
@@ -20,10 +19,7 @@ class FindAccountPage:
         self.ui.button_findidpw[1].enterEvent = lambda event: self.enter_pwfind_event(event)
         self.ui.button_findidpw[1].leaveEvent = lambda event: self.leave_pwfind_event(event)
         # 돋보기, 재생목록 추가 버튼 비활성화
-        self.ui.button_searchbar_findaccountpage[0].setStyleSheet("border-image:url(Pic/SearchBtnEvent.png);")
-        self.ui.button_searchbar_findaccountpage[1].setStyleSheet("border-image:url(Pic/AddPlayListEvent.png);")
-        self.ui.button_searchbar_findaccountpage[0].setDisabled(True)
-        self.ui.button_searchbar_findaccountpage[1].setDisabled(True)
+
         # Back 이벤트
         self.ui.button_back_findaccountpage.mousePressEvent = lambda event: self.back_event(event)
         self.ui.button_back_findaccountpage.enterEvent = lambda event: self.enter_button_event(event)
@@ -62,29 +58,29 @@ class FindAccountPage:
 
     def idfind_logic(self):
         if len(self.checkname) <= 1 and len(self.checknum_id) != 11:
-            self.dialog = Setting.Dialog()
+            self.dialog = Config.Dialog()
             self.dialog.message.setText("이름과 전화번호를 다시 입력해주세요")
             self.dialog.result.show()
         elif len(self.checknum_id) != 11:
-            self.dialog = Setting.Dialog()
+            self.dialog = Config.Dialog()
             self.dialog.message.setText("전화번호를 다시 입력해주세요(010-####-####)")
             self.dialog.result.show()
         elif len(self.checkname) <= 1:
-            self.dialog = Setting.Dialog()
+            self.dialog = Config.Dialog()
             self.dialog.message.setText("이름을 다시 입력해주세요(한글만 입력 가능합니다.)")
             self.dialog.result.show()
         elif int(self.checknum_id[0]) != 0 or int(self.checknum_id[1]) != 1 or int(self.checknum_id[2]) != 0 or self.checknum_id_option == False:
-            self.dialog = Setting.Dialog()
+            self.dialog = Config.Dialog()
             self.dialog.message.setText("전화번호 형식을 지켜주세요 (010~")
             self.dialog.result.show()
         elif self.checkname_option == False:
-            self.dialog = Setting.Dialog()
+            self.dialog = Config.Dialog()
             self.dialog.message.setText("이름을 다시 입력해주세요")
             self.dialog.result.show()
         else:
             self.read_inputdata = self.db.read("userInterFace", ["Name","Phonenumber"],[self.namevalue_id,self.numbervalue_id])
             if len(self.read_inputdata) == 0:
-                self.dialog = Setting.Dialog()
+                self.dialog = Config.Dialog()
                 self.dialog.message.setText("존재하지 않는 계정입니다.")
                 self.dialog.result.show()
                 self.ui.printidpw_findaccountpage[0].setText("")
@@ -109,25 +105,25 @@ class FindAccountPage:
         self.pwfind_logic()
     def pwfind_logic(self):
         if len(self.idValue_pw) == 0 and len(self.checknum_pw) != 11:
-            self.dialog = Setting.Dialog()
+            self.dialog = Config.Dialog()
             self.dialog.message.setText("아이디와 전화번호를 입력해주세요")
             self.dialog.result.show()
         elif len(self.idValue_pw) == 0:
-            self.dialog = Setting.Dialog()
+            self.dialog = Config.Dialog()
             self.dialog.message.setText("아이디를 입력해주세요")
             self.dialog.result.show()
         elif len(self.checknum_pw) != 11:
-            self.dialog = Setting.Dialog()
+            self.dialog = Config.Dialog()
             self.dialog.message.setText("전화번호를 다시 입력해주세요(010-####-####)")
             self.dialog.result.show()
         elif int(self.checknum_pw[0]) != 0 or int(self.checknum_pw[1]) != 1 or int(self.checknum_pw[2]) != 0 or self.checknum_pw_option == False:
-            self.dialog = Setting.Dialog()
+            self.dialog = Config.Dialog()
             self.dialog.message.setText("전화번호 형식을 지켜주세요 (010~")
             self.dialog.result.show()
         else:
             self.read_inputdata = self.db.read("userInterFace", ["Id","Phonenumber"],[self.idValue_pw,self.numbervalue_pw])
             if len(self.read_inputdata) == 0:
-                self.dialog = Setting.Dialog()
+                self.dialog = Config.Dialog()
                 self.dialog.message.setText("존재하지 않는 계정입니다.")
                 self.dialog.result.show()
                 self.ui.printidpw_findaccountpage[1].setText("")

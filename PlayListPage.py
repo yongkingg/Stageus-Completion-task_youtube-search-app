@@ -3,25 +3,27 @@ import sys
 from PyQt5.QtCore import QCoreApplication
 import Ui
 import MyDataBase
-import Setting
+import Config
 
 class PlayListPage:
     def __init__(self,revui,revId):
         self.ui = revui
-        self.getSetting = Setting.Setting()
+        self.getIdValue = revId
+        self.ui = revui
+        self.getSetting = Config.Setting()
         self.db = MyDataBase.MyDataBase() 
         self.getIdValue = revId
         self.getAccontInfor = self.db.read("userInterFace",["id"],[self.getIdValue])
-        print(self.getAccontInfor)
 
+        self.interFaceList = ["Name","Age","Num","TEAM","GRADE"]
         for index in range(0,5):
+            print(self.interFaceList[index] + " : " + str(self.getAccontInfor[0][index+1]))
             if index == 2:
-                self.ui.print_infor_playlistpage[index].setText("0" + str(self.getAccontInfor[0][index+1]))   
+                self.ui.print_infor_playlistpage[index].setText(self.interFaceList[index] + " : " + "0" + str(self.getAccontInfor[0][index+1]))   
             else:
-                self.ui.print_infor_playlistpage[index].setText(str(self.getAccontInfor[0][index+1]))  
+                self.ui.print_infor_playlistpage[index].setText(self.interFaceList[index] + " : " + str(self.getAccontInfor[0][index+1]))  
             self.ui.print_infor_playlistpage[index].setAlignment(QtCore.Qt.AlignCenter)
             self.ui.print_infor_playlistpage[index].setFont(self.getSetting.login_font_printinfor)
-
 
         # 돋보기 버튼 이벤트
         self.ui.button_searchbar_playlistpage[0].mousePressEvent = lambda event: self.videosearch_event(event)

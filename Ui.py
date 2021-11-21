@@ -2,7 +2,7 @@ from sys import _xoptions
 from PyQt5 import QtCore, QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtGui import QBrush, QImage, QPalette, QPixmap
-import Setting
+import Config
 
 # 이미지 경로 하는 방법 - 절대경로
 # self.a = QtWidgets.QLabel(self.StartPage)
@@ -20,7 +20,7 @@ class Ui:
     def __init__(self):
         self.pageset = 0
         # 세팅 가져옴
-        self.getSetting = Setting.Setting()
+        self.getSetting = Config.Setting()
         # 메인윈도우 형성
         self.mainWindow = QtWidgets.QMainWindow()
         self.mainWindow.resize(1600,900)
@@ -77,25 +77,6 @@ class Ui:
 
 
 
-#로그인 사진
-        self.loginPic = QtWidgets.QLabel(self.StartPage)
-        self.loginPic.setGeometry(400,100,800,400)
-        self.loginPic.setStyleSheet(
-            "border-image : url(Pic/LoginPic.png);"
-            "border : white;"
-        )   
-        # 계정만들기
-        self.makeAccountPic = QtWidgets.QLabel(self.StartPage)
-        self.makeAccountPic.setGeometry(470,717,250,50)
-        self.makeAccountPic.setText("Join membership?")
-        self.makeAccountPic.setFont(self.getSetting.login_font_guide)
-
-        # 아이디비번찾기 안내
-        self.findAccountPic = QtWidgets.QLabel(self.StartPage)
-        self.findAccountPic.setGeometry(935,717,200,50)
-        self.findAccountPic.setText("Find ID/PW")
-        self.findAccountPic.setFont(self.getSetting.login_font_guide)
-        self.findAccountPic = QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
         #배경 정사각형
         self.backgroundRec_playlistpage = QtWidgets.QLabel(self.PlayListPage)
         self.backgroundRec_playlistpage.setGeometry(5,0,1595,900)
@@ -129,6 +110,29 @@ class Ui:
             "border : 2px solid black;"
             "background-color : #BFBFBF;"
             )
+
+
+            
+#로그인 사진
+        self.loginPic = QtWidgets.QLabel(self.StartPage)
+        self.loginPic.setGeometry(400,100,800,400)
+        self.loginPic.setStyleSheet(
+            "border-image : url(Pic/LoginPic.png);"
+            "border : white;"
+        )   
+        # 계정만들기
+        self.makeAccountPic = QtWidgets.QLabel(self.StartPage)
+        self.makeAccountPic.setGeometry(470,717,250,50)
+        self.makeAccountPic.setText("Join membership?")
+        self.makeAccountPic.setFont(self.getSetting.login_font_guide)
+        # 아이디비번찾기 안내
+        self.findAccountPic = QtWidgets.QLabel(self.StartPage)
+        self.findAccountPic.setGeometry(935,717,200,50)
+        self.findAccountPic.setText("Find ID/PW")
+        self.findAccountPic.setFont(self.getSetting.login_font_guide)
+        self.findAccountPic = QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+
+        
         # 상단 라벨 
         self.upside_bar_startpage = QtWidgets.QLabel(self.StartPage)
         self.upside_bar_startpage.setGeometry(5,0,1595,50)
@@ -289,6 +293,7 @@ class Ui:
             tmpSpace.setGeometry(60,yPos,280,50)
             tmpSpace.setStyleSheet("border-image : '';"
                 "Color : Black;"
+                "background-color : #D9D9D9;"
             )
             self.print_infor_playlistpage.append(tmpSpace)
         # 정보출력 - 영상 검색 페이지
@@ -299,8 +304,9 @@ class Ui:
             tmpSpace.setGeometry(60,yPos,280,50)
             tmpSpace.setStyleSheet("border-image : '';"
                 "Color : Black;"
+                "background-color : #D9D9D9;"  # #D9D9D9;
             )
-            self.print_infor_playlistpage.append(tmpSpace)
+            self.print_infor_videosearchpage.append(tmpSpace)
         
         # 플레이리스트창 배경
         self.back_videosearchpage = QtWidgets.QLabel(self.VideoSearchPage)
@@ -486,7 +492,7 @@ class Ui:
 
     
         self.guide_findaccountpage = []
-        self.guide_findaccountpage_text = ["FINDID","FINDPW"]
+        self.guide_findaccountpage_text = ["FIND ID","FIND PW"]
         for index in range(0,2):
             tmpSpace = QtWidgets.QLabel(self.FindAccountPage)
             yPos = 180 + (index * 340)
@@ -532,7 +538,7 @@ class Ui:
 
         # 아이디/비번찾기
         self.button_findidpw = []
-        self.button_findidpw_text = ["IDFIND","PWFIND"]
+        self.button_findidpw_text = ["ID FIND","PW FIND"]
         for index in range(0,2):
             tmpBtn = QtWidgets.QPushButton(self.FindAccountPage)
             yPos = 340 + (index*340)
@@ -553,10 +559,10 @@ class Ui:
         self.button_back_makeaccountpage.setGeometry(1472,710,93,160)
         self.button_back_makeaccountpage.setStyleSheet("border-image:url(Pic/Back_VideoSearchPage.png);")
 
-    
+        
         #아이디 중복확인버튼
         self.button_checkid = QtWidgets.QPushButton(self.MakeAccountPage)
-        self.button_checkid.setGeometry(950,380,150,60)
+        self.button_checkid.setGeometry(950,250,150,60)
         self.button_checkid.setText("CHECK")
         self.button_checkid.setFont(self.getSetting.search_video_font)
         self.button_checkid.setStyleSheet(
@@ -568,6 +574,17 @@ class Ui:
         self.personimage_makeaccountpage = QtWidgets.QLabel(self.MakeAccountPage)
         self.personimage_makeaccountpage.setGeometry(650,60,300,300)
         self.personimage_makeaccountpage.setStyleSheet("border-image : url(Pic/person.png);")
+        
+        
+        self.print_signup = QtWidgets.QLabel(self.MakeAccountPage)
+        self.print_signup.setGeometry(700,180,200,50)
+        self.print_signup.setStyleSheet(
+            "border : '';"
+            "background-color : #D9D9D9;"
+            )
+        self.print_signup.setText("SIGN UP")
+        self.print_signup.setAlignment(QtCore.Qt.AlignCenter)
+        self.print_signup.setFont(self.getSetting.findidpw_font)
         # 정보 입력
         self.inputinfor_makeaccountpage = []
         for index in range(0,5):
@@ -576,7 +593,7 @@ class Ui:
                 xlength = 420
             else:
                 xlength = 600
-            yPos = 380 + (index * 70)
+            yPos = 250 + (index * 100)
             tmpSpace.setGeometry(500,yPos,xlength,60)
             self.inputinfor_makeaccountpage.append(tmpSpace)
             self.inputinfor_makeaccountpage[index].setStyleSheet(
@@ -584,12 +601,22 @@ class Ui:
                 "background-color : lightgrey;"    
                 "border : 4px solid black;"
             )
+        self.warning_bar = []
+        for index in range(0,5):
+            tmpSpace = QtWidgets.QLabel(self.MakeAccountPage)
+            yPos = 310 + (index * 100)
+            tmpSpace.setGeometry(520,yPos,600,40)
+            self.warning_bar.append(tmpSpace)
+            self.warning_bar[index].setStyleSheet(
+            "color : red;"
+            "background-color : #D9D9D9 ;"
+            )
             
         self.combobox_makeaccountpage = []
         for index in range(0,2):
             tmpBox = QtWidgets.QComboBox(self.MakeAccountPage)
             xPos = 500 + (index*350)
-            tmpBox.setGeometry(xPos,730,250,60)
+            tmpBox.setGeometry(xPos,750,250,60)
             self.combobox_makeaccountpage.append(tmpBox)
             self.combobox_makeaccountpage[index].setStyleSheet(
                 "border : 4px solid black;"
@@ -599,7 +626,7 @@ class Ui:
             
         # 회원가입 버튼
         self.button_makeaccount = QtWidgets.QPushButton(self.MakeAccountPage) #회원가입 버튼
-        self.button_makeaccount.setGeometry(650,800,300,50)
+        self.button_makeaccount.setGeometry(650,820,300,50)
         self.button_makeaccount.setText("MAKEID")
         self.button_makeaccount.setFont(self.getSetting.search_video_font)
         self.button_makeaccount.setStyleSheet(
@@ -620,7 +647,7 @@ class Ui:
         self.personimage_manageinforpage.setGeometry(650,60,300,300)
         self.personimage_manageinforpage.setStyleSheet("border-image : url(Pic/person.png);")
 
-        # 정보 입력
+        # 정보 입력 (1. 패스워드 2. 이름 3. 나이 4.전화번호)
         self.inputinfor_manageinforpage = []
         for index in range(0,5):
             tmpSpace = QtWidgets.QLineEdit(self.ManageInforPage)
@@ -653,5 +680,5 @@ class Ui:
             self.button_exit.append(tmpBtn)
             self.button_exit[index].setStyleSheet("border-image:url(Pic/Exit.png);")
 
-        # self.stackedWidget.setCurrentIndex(6)  
+        self.stackedWidget.setCurrentIndex(0)  
         self.mainWindow.show()

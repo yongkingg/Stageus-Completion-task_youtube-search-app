@@ -1,28 +1,26 @@
-from PyQt5 import QtWidgets
-import sys
-from PyQt5.QtCore import QCoreApplication
-import Ui
+from sys import _xoptions
+from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtGui
+from PyQt5.QtGui import QBrush, QImage, QPalette, QPixmap
+import Config
 import MyDataBase
-import Setting
-
 
 class ManageInforPage:
-    def __init__(self,revui):
-        self.ui = revui
+    def __init__(self,revUi,revId):
+        self.ui = revUi
+        self.getIdValue = revId
         self.db = MyDataBase.MyDataBase()
-        # 돋보기, 재생목록 추가 버튼 비활성화
-        self.ui.button_searchbar_manageinforpage[0].setStyleSheet("border-image:url(Pic/SearchBtnEvent.png);")
-        self.ui.button_searchbar_manageinforpage[1].setStyleSheet("border-image:url(Pic/AddPlayListEvent.png);")
-        self.ui.button_searchbar_manageinforpage[0].setDisabled(True)
-        self.ui.button_searchbar_manageinforpage[1].setDisabled(True)
+        self.getAccontInfor = self.db.read("userInterFace",["id"],[self.getIdValue])
+
+        self.getSetting = Config.Setting()
+        self.db = MyDataBase.MyDataBase()
+      
+        
+
         # Back 이벤트
         self.ui.button_back_manageinforpage.mousePressEvent = lambda event: self.back_event(event)
         self.ui.button_back_manageinforpage.enterEvent = lambda event: self.enter_backbtn_event(event)
         self.ui.button_back_manageinforpage.leaveEvent = lambda event: self.leave_backbtn_event(event)
-        # update 버튼 이벤트
-        self.ui.button_manageinforpage.mousePressEvent = lambda event: self.update_event(event)
-        self.ui.button_manageinforpage.enterEvent = lambda event: self.enter_updatebtn_event(event)
-        self.ui.button_manageinforpage.leaveEvent = lambda event: self.leave_updatebtn_event(event)
 
 
 

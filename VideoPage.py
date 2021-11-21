@@ -4,7 +4,7 @@ import sys
 from PyQt5.QtCore import QCoreApplication
 import Ui
 import MyDataBase
-import Setting
+import Config
 
 class VideoPage:
     def __init__(self,revui):
