@@ -44,13 +44,6 @@ class PlayListPage:
             self.ui.button_playlistpage[index].enterEvent = lambda event, num = index: self.enter_button_event(event,num)
             self.ui.button_playlistpage[index].leaveEvent = lambda event, num = index: self.leave_button_event(event,num)
 
-
-
-
-        
-
-
-    
     def enter_button_event(self,event,index):
         self.ui.button_playlistpage[index].setStyleSheet("border-image : '';"
                 "background-color : black;"   
@@ -81,8 +74,10 @@ class PlayListPage:
     def leave_search_event(self,event):
         self.ui.button_searchbar_playlistpage[0].setStyleSheet("border-image:url(Pic/SearchBtn.png);")
     def addplaylist_event(self,event):
-        pass
+        self.ui.makePlayList()
     def enter_plus_event(self,event):
         self.ui.button_searchbar_playlistpage[1].setStyleSheet("border-image:url(Pic/AddPlayListEvent.png);")
     def leave_plus_event(self,event):
         self.ui.button_searchbar_playlistpage[1].setStyleSheet("border-image:url(Pic/AddPlayList.png);")
+
+

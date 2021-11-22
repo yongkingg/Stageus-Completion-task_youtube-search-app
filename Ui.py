@@ -3,6 +3,7 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5 import QtGui
 from PyQt5.QtGui import QBrush, QImage, QPalette, QPixmap
 import Config
+from VideoSearchPage import VideoSearchPage
 
 # 이미지 경로 하는 방법 - 절대경로
 # self.a = QtWidgets.QLabel(self.StartPage)
@@ -680,5 +681,55 @@ class Ui:
             self.button_exit.append(tmpBtn)
             self.button_exit[index].setStyleSheet("border-image:url(Pic/Exit.png);")
 
+
+        self.playListCount = 0
+
+
+
+
         self.stackedWidget.setCurrentIndex(0)  
         self.mainWindow.show()
+    def makePlayList(self):
+        self.result = QtWidgets.QDialog()
+        self.result.resize(500,200)
+        self.message = QtWidgets.QLabel(self.result) 
+        self.message.setGeometry(50,20,400,50)
+        self.message.setStyleSheet("border : 2px solid black;")
+        self.message.setText("Add PlayList?")
+        self.message.setAlignment(QtCore.Qt.AlignCenter)
+        self.message.setFont(self.getSetting.findidpw_font)
+     
+
+        self.playListName = QtWidgets.QLineEdit(self.result)
+        self.playListName.setGeometry(50,100,400,50)
+        self.playListName.setStyleSheet("border : 2px solid black;")
+        self.playListName.setPlaceholderText("Playlist name : ")
+
+        self.makeBtn = QtWidgets.QPushButton(self.result)
+        self.makeBtn.setGeometry(200,160,100,40)
+        self.makeBtn.setStyleSheet(
+            "border : 2px solid black;"
+            "background-color : lightgrey;"
+        )
+        self.makeBtn.setText("Make")
+        self.makeBtn.setFont(self.getSetting.findidpw_font)
+        self.makeBtn.clicked.connect(self.makeplaylist_btn)
+        self.result.show()
+
+    def makeplaylist_btn(self):
+        self.playListCount += 1
+        self.result.close()
+        name = self.playListName.text()
+        self.playList = QtWidgets.QLabel(self.PlayListPage)
+        self.playList.setGeometry(395,150*self.playListCount,1125,100)
+        self.playList.setStyleSheet(
+            "border : 4px solid black;"
+            "background-color : #D9D9D9;"
+        )
+        self.playList.setText(name)
+        self.playList.setAlignment(QtCore.Qt.AlignCenter)
+        self.playList.show()
+
+
+# 플레이리스트를 db에 연결 . 꺼도 유지되게 만들기 
+# 플레이리스트 이름, 재생 , 삭제 버튼 만들기

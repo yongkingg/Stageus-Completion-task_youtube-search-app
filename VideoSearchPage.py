@@ -21,7 +21,6 @@ class VideoSearchPage:
         self.keyWord = revKeyWord
         self.getIdValue = revId
         self.getAccontInfor = self.db.read("userInterFace",["id"],[self.getIdValue])
-        print(self.keyWord)
 
         # 인터페이스리스트 적용 X
         self.interFaceList = ["Name","Age","Num","TEAM","GRADE"]

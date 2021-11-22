@@ -35,6 +35,10 @@ class Dialog:
         self.message = QtWidgets.QLabel(self.result) 
         self.message.resize(400,50)
         self.message.move(0,0)
+
+
+
+
 class Type:
     def __init__(self):
         self.intType = ["1","2","3","4","5","6","7","8","9","0"]
