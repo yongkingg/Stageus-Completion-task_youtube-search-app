@@ -4,7 +4,7 @@ from PyQt5.QtCore import QCoreApplication
 import Ui
 import MyDataBase
 import Config
-
+import VideoSearchPage
 class PlayListPage:
     def __init__(self,revui,revId):
         self.ui = revui
@@ -15,9 +15,11 @@ class PlayListPage:
         self.getIdValue = revId
         self.getAccontInfor = self.db.read("userInterFace",["id"],[self.getIdValue])
 
+        self.ui.searchvideo_playlistpage.setPlaceholderText("Search the video")
+        self.ui.searchvideo_playlistpage.setFont(self.getSetting.search_video_font)
+
         self.interFaceList = ["Name","Age","Num","TEAM","GRADE"]
         for index in range(0,5):
-            print(self.interFaceList[index] + " : " + str(self.getAccontInfor[0][index+1]))
             if index == 2:
                 self.ui.print_infor_playlistpage[index].setText(self.interFaceList[index] + " : " + "0" + str(self.getAccontInfor[0][index+1]))   
             else:
@@ -45,7 +47,7 @@ class PlayListPage:
 
 
 
-
+        
 
 
     
@@ -70,6 +72,8 @@ class PlayListPage:
         for index in range(0,2):
             self.ui.inputIDPW[index].clear()
     def videosearch_event(self,event):
+        save_keyword = self.ui.searchvideo_playlistpage.text()
+        self.videoSearchPage = VideoSearchPage.VideoSearchPage(self.ui,self.getIdValue,save_keyword)
         self.ui.pageset += 2
         self.ui.stackedWidget.setCurrentIndex(self.ui.pageset)
     def enter_search_event(self,event):

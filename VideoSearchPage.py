@@ -4,17 +4,25 @@ from PyQt5 import QtGui
 from PyQt5.QtGui import QBrush, QImage, QPalette, QPixmap
 import Config
 import MyDataBase
-
-
+import pafy
+import vlc
+import time
+import urllib.request
+import re
+import Config
+import PlayVideoThread
 class VideoSearchPage:
-    def __init__(self,revUi,revId):
+    def __init__(self,revUi,revId,revKeyWord):
         self.ui = revUi
         self.db = MyDataBase.MyDataBase()
         self.getSetting = Config.Setting()
         self.db = MyDataBase.MyDataBase()
-
+        self.dialog = Config.Dialog()
+        self.keyWord = revKeyWord
         self.getIdValue = revId
         self.getAccontInfor = self.db.read("userInterFace",["id"],[self.getIdValue])
+        print(self.keyWord)
+
         # 인터페이스리스트 적용 X
         self.interFaceList = ["Name","Age","Num","TEAM","GRADE"]
         for index in range(0,5):
@@ -26,7 +34,8 @@ class VideoSearchPage:
             self.ui.print_infor_videosearchpage[index].setAlignment(QtCore.Qt.AlignCenter)
             self.ui.print_infor_videosearchpage[index].setFont(self.getSetting.login_font_printinfor)
 
-
+        self.ui.searchvideo_videosearchpage.setPlaceholderText("Search the video")
+        self.ui.searchvideo_videosearchpage.setFont(self.getSetting.search_video_font)
         # 돋보기 버튼 이벤트
         self.ui.button_searchbar_videosearchpage[0].mousePressEvent = lambda event: self.videosearch_event(event)
         self.ui.button_searchbar_videosearchpage[0].enterEvent = lambda event: self.enter_search_event(event)
@@ -64,16 +73,15 @@ class VideoSearchPage:
                 "border : 4px solid black;"
             )
     def back_event(self,event):
+        self.ui.searchvideo_playlistpage.clear()
+        self.ui.searchvideo_videosearchpage.clear()
         self.ui.pageset -= 2
         self.ui.stackedWidget.setCurrentIndex(self.ui.pageset)
     def enter_backbtn_event(self,event):
             self.ui.button_videosearchpage[1].setStyleSheet("border-image : url(Pic/BackBtnEvent.png);")
     def leave_backbtn_event(self,event):
             self.ui.button_videosearchpage[1].setStyleSheet("border-image : url(Pic/Back_VideoSearchPage.png);")
-    def videosearch_event(self,event):
-        # self.ui.pageset -= 2
-        # self.ui.stackedWidget.setCurrentIndex(self.ui.pageset)
-        pass
+    
     def enter_search_event(self,event):
         self.ui.button_searchbar_videosearchpage[0].setStyleSheet("border-image:url(Pic/SearchBtnEvent.png);")
     def leave_search_event(self,event):
@@ -84,3 +92,6 @@ class VideoSearchPage:
         self.ui.button_searchbar_videosearchpage[1].setStyleSheet("border-image:url(Pic/AddPlayListEvent.png);")
     def leave_plus_event(self,event):
         self.ui.button_searchbar_videosearchpage[1].setStyleSheet("border-image:url(Pic/AddPlayList.png);")
+    def videosearch_event(self,event):
+        playVideo = PlayVideoThread.VideoThread(self.ui)
+        

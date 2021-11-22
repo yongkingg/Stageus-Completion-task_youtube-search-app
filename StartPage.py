@@ -55,7 +55,6 @@ class StartPage:
                 self.ui.stackedWidget.setCurrentIndex(self.ui.pageset)
                 self.sendIdValue = PlayListPage.PlayListPage(self.ui,self.idValue)
                 self.manageInforPage = ManageInforPage.ManageInforPage(self.ui,self.idValue)
-                self.videoSearchPage = VideoSearchPage.VideoSearchPage(self.ui,self.idValue)
 
             else:
                 self.dialog = Config.Dialog()
