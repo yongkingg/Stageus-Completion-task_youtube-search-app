@@ -327,7 +327,7 @@ class Ui:
         self.back_playlistpage = QtWidgets.QScrollArea(self.PlayListPage)
         self.back_playlistpage.setGeometry(395,143,1170,690)
         self.back_playlistpage.setStyleSheet(
-            #"border: 4px solid black;"
+            # "border: 4px solid black;"
             "background-color : #D9D9D9;"
             )
         # self.back_playlistpage.setWidgetResizable(True)
@@ -360,7 +360,7 @@ class Ui:
                 xLength = 200
                 yLength = 70
             else:
-                yPos =850
+                yPos =840
                 xLength = 181
                 yLength = 30
             tmpBtn.setGeometry(xPos,yPos,xLength,yLength)
@@ -687,57 +687,18 @@ class Ui:
             tmpBtn.setGeometry(1540,5,40,40)
             self.button_exit.append(tmpBtn)
             self.button_exit[index].setStyleSheet("border-image:url(Pic/Exit.png);")
-        self.playListCount = 0
-        self.playList = []
-        self.scrollAreaWidgetContents = QtWidgets.QWidget(self.back_playlistpage)
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+
 
         self.stackedWidget.setCurrentIndex(0)  
         self.mainWindow.show()
 
-    def makePlayList(self):
-        # PlayList 추가 다이얼로그
-        self.result = QtWidgets.QDialog()
-        self.result.resize(500,200)
-        self.message = QtWidgets.QLabel(self.result) 
-        self.message.setGeometry(50,20,400,50)
-        self.message.setStyleSheet("border : 2px solid black;")
-        self.message.setText("Add PlayList?")
-        self.message.setAlignment(QtCore.Qt.AlignCenter)
-        self.message.setFont(self.getSetting.findidpw_font)
-        # 플레이리스트 이름 
-        self.playListName = QtWidgets.QLineEdit(self.result)
-        self.playListName.setGeometry(50,100,400,50)
-        self.playListName.setStyleSheet("border : 2px solid black;")
-        self.playListName.setPlaceholderText("Playlist name : ")
-        # 플레이리스트 제작 버튼 
-        self.makeBtn = QtWidgets.QPushButton(self.result)
-        self.makeBtn.setGeometry(200,160,100,40)
-        self.makeBtn.setStyleSheet(
-            "border : 2px solid black;"
-            "background-color : lightgrey;"
-        )
-        self.makeBtn.setText("Make")
-        self.makeBtn.setFont(self.getSetting.findidpw_font)
-        self.makeBtn.clicked.connect(self.makeplaylist_btn)
-        self.result.show()
+
+
+    
 
 
 
-    def makeplaylist_btn(self):
-        self.scrollAreaWidgetContents.setGeometry(0,0,1125,120+(self.playListCount*120))
-        print(self.playListCount)
-        self.result.close()
-        name = self.playListName.text()
-        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label.setGeometry(0,0,1125,100)
-        self.label.setStyleSheet("border:2px solid black;")
-        self.label.setMaximumHeight(100)
-        self.label.setMinimumHeight(100)
-        self.playList.append(self.label)
-        self.verticalLayout.addWidget(self.playList[self.playListCount])
-        self.playListCount += 1
-        self.back_playlistpage.setWidget(self.scrollAreaWidgetContents)
+
 
 
 # 플레이리스트를 db에 연결 . 꺼도 유지되게 만들기 
