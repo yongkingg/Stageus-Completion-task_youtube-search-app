@@ -309,6 +309,7 @@ class Ui:
             )
             self.print_infor_videosearchpage.append(tmpSpace)
         
+        
         # 플레이리스트창 배경
         self.back_videosearchpage = QtWidgets.QLabel(self.VideoSearchPage)
         self.back_videosearchpage.setGeometry(395,100,1170,690)
@@ -323,18 +324,20 @@ class Ui:
             "background-color : #D9D9D9"
             )
         # 플레이리스트창
-        self.back_playlistpage = QtWidgets.QLabel(self.PlayListPage)
-        self.back_playlistpage.setGeometry(395,100,1170,690)
+        self.back_playlistpage = QtWidgets.QScrollArea(self.PlayListPage)
+        self.back_playlistpage.setGeometry(395,143,1170,690)
         self.back_playlistpage.setStyleSheet(
-            "border: 4px solid black;"
-            "background-color : #D9D9D9"
+            #"border: 4px solid black;"
+            "background-color : #D9D9D9;"
             )
-        self.logoutbar_playlistpage = QtWidgets.QLabel(self.PlayListPage)
-        self.logoutbar_playlistpage.setGeometry(395,786,999,85)
-        self.logoutbar_playlistpage.setStyleSheet(
-            "border: 4px solid black;"
-            "background-color : #D9D9D9"
-            )
+        # self.back_playlistpage.setWidgetResizable(True)
+
+        # self.logoutbar_playlistpage = QtWidgets.QLabel(self.PlayListPage)
+        # self.logoutbar_playlistpage.setGeometry(395,800,999,85)
+        # self.logoutbar_playlistpage.setStyleSheet(
+        #     "border: 4px solid black;"
+        #     "background-color : #D9D9D9"
+        #     )
 
         # 영상 검색 창
         self.searchvideo_playlistpage = QtWidgets.QLineEdit(self.PlayListPage)
@@ -357,9 +360,9 @@ class Ui:
                 xLength = 200
                 yLength = 70
             else:
-                yPos =786
+                yPos =850
                 xLength = 181
-                yLength = 85
+                yLength = 30
             tmpBtn.setGeometry(xPos,yPos,xLength,yLength)
             self.button_playlistpage.append(tmpBtn)
             self.button_playlistpage[index].setText(self.button_playlistpage_text[index])
@@ -368,6 +371,10 @@ class Ui:
                 "border : 4px solid black;"
             )
             self.button_playlistpage[index].setFont(self.getSetting.search_video_font)
+            # (1080 100 45 690 4px)
+            # 스크롤
+            # self.scrollbar_playlistpage = QtWidgets.QScrollArea(self.PlayListPage)
+            # self.scrollbar_playlistpage.setWidget(self.)
         # 돋보기, 플러스 버튼
         self.button_searchbar_playlistpage = []
         for index in range(0,2):
@@ -680,16 +687,16 @@ class Ui:
             tmpBtn.setGeometry(1540,5,40,40)
             self.button_exit.append(tmpBtn)
             self.button_exit[index].setStyleSheet("border-image:url(Pic/Exit.png);")
-
-
         self.playListCount = 0
-
-
-
+        self.playList = []
+        self.scrollAreaWidgetContents = QtWidgets.QWidget(self.back_playlistpage)
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
 
         self.stackedWidget.setCurrentIndex(0)  
         self.mainWindow.show()
+
     def makePlayList(self):
+        # PlayList 추가 다이얼로그
         self.result = QtWidgets.QDialog()
         self.result.resize(500,200)
         self.message = QtWidgets.QLabel(self.result) 
@@ -698,13 +705,12 @@ class Ui:
         self.message.setText("Add PlayList?")
         self.message.setAlignment(QtCore.Qt.AlignCenter)
         self.message.setFont(self.getSetting.findidpw_font)
-     
-
+        # 플레이리스트 이름 
         self.playListName = QtWidgets.QLineEdit(self.result)
         self.playListName.setGeometry(50,100,400,50)
         self.playListName.setStyleSheet("border : 2px solid black;")
         self.playListName.setPlaceholderText("Playlist name : ")
-
+        # 플레이리스트 제작 버튼 
         self.makeBtn = QtWidgets.QPushButton(self.result)
         self.makeBtn.setGeometry(200,160,100,40)
         self.makeBtn.setStyleSheet(
@@ -716,20 +722,25 @@ class Ui:
         self.makeBtn.clicked.connect(self.makeplaylist_btn)
         self.result.show()
 
+
+
     def makeplaylist_btn(self):
-        self.playListCount += 1
+        self.scrollAreaWidgetContents.setGeometry(0,0,1125,120+(self.playListCount*120))
+        print(self.playListCount)
         self.result.close()
         name = self.playListName.text()
-        self.playList = QtWidgets.QLabel(self.PlayListPage)
-        self.playList.setGeometry(395,150*self.playListCount,1125,100)
-        self.playList.setStyleSheet(
-            "border : 4px solid black;"
-            "background-color : #D9D9D9;"
-        )
-        self.playList.setText(name)
-        self.playList.setAlignment(QtCore.Qt.AlignCenter)
-        self.playList.show()
+        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        self.label.setGeometry(0,0,1125,100)
+        self.label.setStyleSheet("border:2px solid black;")
+        self.label.setMaximumHeight(100)
+        self.label.setMinimumHeight(100)
+        self.playList.append(self.label)
+        self.verticalLayout.addWidget(self.playList[self.playListCount])
+        self.playListCount += 1
+        self.back_playlistpage.setWidget(self.scrollAreaWidgetContents)
 
 
 # 플레이리스트를 db에 연결 . 꺼도 유지되게 만들기 
+# ---- db 만들어놓긴 했음.
+# 스크롤바 공부할것. 
 # 플레이리스트 이름, 재생 , 삭제 버튼 만들기

@@ -12,9 +12,10 @@ class MyDataBase:
 
         # self.cur.execute("CREATE TABLE saveIDPW (Id TEXT , Pw TEXT);")
         # self.cur.execute("CREATE TABLE userInterFace (Id Text, Name TEXT,  Age INTEGER, Phonenumber INTEGER, TEAM TEXT, GRADE INTEGER);")
+        # self.cur.execute("CREATE TABLE playList (Number INTEGER, Name TEXT )")
         # self.cur.execute("DROP TABLE saveIDPW;")
         # self.cur.execute("DROP TABLE userInterFace;")
-
+        # self.cur.execute("DROP TABLE playList;")
 
     #     self.make()
 
