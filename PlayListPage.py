@@ -50,7 +50,6 @@ class PlayListPage:
                 self.ui.button_playlistpage[index].mousePressEvent = lambda event, num = index: self.logout_event(event, num)
             self.ui.button_playlistpage[index].enterEvent = lambda event, num = index: self.enter_button_event(event,num)
             self.ui.button_playlistpage[index].leaveEvent = lambda event, num = index: self.leave_button_event(event,num)
-
     def enter_button_event(self,event,index):
         self.ui.button_playlistpage[index].setStyleSheet("border-image : '';"
                 "background-color : black;"   
@@ -110,12 +109,17 @@ class PlayListPage:
     def makeplaylist_btn(self):
         self.scrollAreaWidgetContents.setGeometry(0,0,1125,120+(self.playListCount*120))
         self.name = self.playListName.text()
-
+        getPlayList = self.db.read("playList",["PlayListName"],[self.name])
         if len(self.name) == 0:
             self.dialog = Config.Dialog()
             self.dialog.message.setText("Please Make Playlist name")
             self.dialog.result.show()  
+        elif len(getPlayList) == 1:
+            self.dialog = Config.Dialog()
+            self.dialog.message.setText("Please change Playlist name")
+            self.dialog.result.show() 
         else:
+            putPlayList = self.db.create("playList",["PlayListName"],[self.name])
             label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
             label.setGeometry(0,0,1125,100)
             label.setStyleSheet("border:2px solid black;")

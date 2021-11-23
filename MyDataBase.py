@@ -12,15 +12,17 @@ class MyDataBase:
 
         # self.cur.execute("CREATE TABLE saveIDPW (Id TEXT , Pw TEXT);")
         # self.cur.execute("CREATE TABLE userInterFace (Id Text, Name TEXT,  Age INTEGER, Phonenumber INTEGER, TEAM TEXT, GRADE INTEGER);")
-        # self.cur.execute("CREATE TABLE playList (Number INTEGER, Name TEXT )")
+        # self.cur.execute("CREATE TABLE playList (PlayListName TEXT);")
+        # self.cur.execute("CREATE TABLE video (PlayListName TEXT, Video TEXT);")
         # self.cur.execute("DROP TABLE saveIDPW;")
         # self.cur.execute("DROP TABLE userInterFace;")
         # self.cur.execute("DROP TABLE playList;")
+        # self.cur.execute("DROP TABLE video;")
 
     #     self.make()
 
     # def make(self):
-    #     self.cur.execute("INSERT INTO userInterFace VALUES('dydwns8064','김용준','20','01057937967','영업1팀','대리');")
+    #     self.cur.execute("INSERT INTO playList VALUES('dydwns8064');")
     #     self.conn.commit()
 
     def create(self, table, column, data):    
