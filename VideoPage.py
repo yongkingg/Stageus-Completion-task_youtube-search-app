@@ -98,7 +98,8 @@ class VideoPage:
     def leave_shuffleplay_event(self,event):
         self.ui.button_selectplaylist[1].setStyleSheet("border-image:url(Pic/ShufflePlay.png);")
     def back_event(self,event):
-        print("뒤로가기 누를때 동작")
+        self.ui.pageset -= 1
+        self.ui.stackedWidget.setCurrentIndex(self.ui.pageset)    
     def enter_back_event(self,event):
         self.ui.button_selectplaylist[2].setStyleSheet("border-image:url(Pic/BackEvent.png);")
     def leave_back_event(self,event):

@@ -18,6 +18,7 @@ class StartPage:
         self.videoPage = VideoPage.VideoPage(self.ui)
         self.ui.inputIDPW[0].setPlaceholderText("ID")
         self.ui.inputIDPW[1].setPlaceholderText("PW")
+
         # 로그인,회원가입,아이디 찾기 버튼 활성화
         for index in range(0,3):
             if index == 0:

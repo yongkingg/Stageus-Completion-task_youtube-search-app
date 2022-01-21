@@ -14,13 +14,48 @@ class PlayListPage:
         self.db = MyDataBase.MyDataBase() 
         self.getIdValue = revId
         self.getAccontInfor = self.db.read("userInterFace",["id"],[self.getIdValue])
-
-        self.playListCount = 0
+        
+        
         self.playList = []
         self.playlistbtn_play = []
         self.playlistbtn_delete = []
         self.scrollAreaWidgetContents = QtWidgets.QWidget(self.ui.back_playlistpage)
         self.verticalLayout = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.getPlaylist = self.db.read("playList",["PlayListName"],[""])
+        if len(self.getPlaylist) == 0:
+            self.getPlaylist = self.db.cur.execute("SELECT * FROM playList;")
+            self.playListResult = self.getPlaylist.fetchall()   
+        if len(self.playListResult) == 0:
+            self.playListCount = 0
+        else:
+            self.playListCount = len(self.playListResult)
+            for index in range(0,self.playListCount):
+                self.scrollAreaWidgetContents.setGeometry(0,0,1125,120+(self.playListCount*120))
+                label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+                label.setGeometry(0,0,1125,100)
+                label.setStyleSheet("border:2px solid black;")
+                label.setMaximumHeight(100)
+                label.setMinimumHeight(100)
+                label.setText(self.playListResult[index][0])
+                label.setAlignment(QtCore.Qt.AlignCenter)
+                label.setFont(self.getSetting.findidpw_font)
+                self.playList.append(label)
+
+                self.button_play_playlist = QtWidgets.QPushButton(label)
+                self.button_play_playlist.setStyleSheet("border-image : url(Pic/Play.png);")
+                self.button_play_playlist.setGeometry(950,25,50,50)
+                self.playlistbtn_play.append(self.button_play_playlist)
+                self.playlistbtn_play[index].mousePressEvent = lambda event, num = index: self.playvideo_exist(event,num)
+                
+
+                self.button_delete_playlist = QtWidgets.QPushButton(label)
+                self.button_delete_playlist.setStyleSheet("border-image : url(Pic/ErasePlaylist.png);")
+                self.button_delete_playlist.setGeometry(1025,25,50,50)
+                self.playlistbtn_delete.append(self.button_delete_playlist)
+                self.playlistbtn_delete[index].mousePressEvent = lambda event, num = index: self.delete_existList(event,num)
+                
+                self.verticalLayout.addWidget(self.playList[index])
+                self.ui.back_playlistpage.setWidget(self.scrollAreaWidgetContents)
 
         self.ui.searchvideo_playlistpage.setPlaceholderText("Search the video")
         self.ui.searchvideo_playlistpage.setFont(self.getSetting.search_video_font)
@@ -64,7 +99,6 @@ class PlayListPage:
     def update_event(self,event,index):
         self.ui.pageset += 5
         self.ui.stackedWidget.setCurrentIndex(self.ui.pageset)
-        
     def logout_event(self,event,index):
         self.ui.pageset -= 1
         self.ui.stackedWidget.setCurrentIndex(self.ui.pageset)
@@ -79,7 +113,6 @@ class PlayListPage:
         self.ui.button_searchbar_playlistpage[0].setStyleSheet("border-image:url(Pic/SearchBtnEvent.png);")
     def leave_search_event(self,event):
         self.ui.button_searchbar_playlistpage[0].setStyleSheet("border-image:url(Pic/SearchBtn.png);")
-    
     def addplaylist_event(self,event):
         self.result = QtWidgets.QDialog()
         self.result.resize(500,200)
@@ -105,7 +138,6 @@ class PlayListPage:
         self.makeBtn.setFont(self.getSetting.findidpw_font)
         self.makeBtn.clicked.connect(self.makeplaylist_btn)
         self.result.show()
-
     def makeplaylist_btn(self):
         self.scrollAreaWidgetContents.setGeometry(0,0,1125,120+(self.playListCount*120))
         self.name = self.playListName.text()
@@ -137,32 +169,32 @@ class PlayListPage:
             self.playListCount += 1
             self.ui.back_playlistpage.setWidget(self.scrollAreaWidgetContents)
         self.result.close()
-
-
-
     def makeBtnPlayList(self, label):
-        print(self.playList[self.playListCount])
-        print(self.playListCount)
-
         self.button_play_playlist = QtWidgets.QPushButton(label)
         self.button_play_playlist.setStyleSheet("border-image : url(Pic/Play.png);")
         self.button_play_playlist.setGeometry(950,25,50,50)
         self.playlistbtn_play.append(self.button_play_playlist)
-        self.playlistbtn_play[self.playListCount-1].clicked.connect(self.play)
+        self.playlistbtn_play[self.playListCount].mousePressEvent = lambda event, num = self.playListCount : self.playvideo_new(event,num)
 
         self.button_delete_playlist = QtWidgets.QPushButton(label)
         self.button_delete_playlist.setStyleSheet("border-image : url(Pic/ErasePlaylist.png);")
         self.button_delete_playlist.setGeometry(1025,25,50,50)
         self.playlistbtn_delete.append(self.button_delete_playlist)
-        self.playlistbtn_delete[self.playListCount].clicked.connect(self.delete)
+        self.playlistbtn_delete[self.playListCount].mousePressEvent = lambda event,num = self.playListCount : self.delete_new(event,num)
 
-    def play(self):
+
+
+    def playvideo_exist(self,event,index):
         self.ui.pageset += 1
         self.ui.stackedWidget.setCurrentIndex(self.ui.pageset)
-    def delete(self):
-        pass
-
-
+    def delete_existList(self,event,index):
+        print("1")
+    
+    def playvideo_new(self,event, num):
+        self.ui.pageset += 1
+        self.ui.stackedWidget.setCurrentIndex(self.ui.pageset)
+    def delete_new(self,event, num):
+        print("1")
 
 
 
